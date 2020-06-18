@@ -1,0 +1,190 @@
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+  height: 100%;
+  flex-direction: column;
+  width: 100%;
+}
+.app-layout {
+  width: 100%;
+  margin: 0 auto;
+  min-height: calc(100vh - 126px);
+  max-width: $page-max-width;
+  min-width: $page-min-width;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  flex-grow: 1;
+  flex: 1 0 auto;
+  padding-bottom: 60px;
+}
+
+.footer-align {
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+/**
+ * Main area
+ */
+
+.app-layout > .app-layout-main {
+  box-sizing: border-box;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: auto;
+
+  /* Full height aside */
+  display: flex;
+  flex-direction: row;
+}
+
+/* Only flex the main aria */
+
+.app-layout > * {
+  flex: none;
+}
+
+/**
+ * Aside area
+ */
+
+.app-layout-aside {
+  display: none;
+}
+
+.app-layout-aside-wrap {
+  display: flex;
+}
+
+.elq-min-width-801px {
+  &.app-layout-aside {
+    display: flex;
+    position: relative;
+    z-index: 1;
+    width: $aside-width;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: $aside-width;
+  }
+}
+
+.elq-min-width-992px {
+  &.app-layout-aside {
+    width: $aside-width-lg;
+    flex-basis: $aside-width-lg;
+  }
+}
+
+/**
+ * Container
+ */
+
+.app-layout-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 1.3rem 15px 0 15px !important;
+  margin: 0 auto 1rem;
+  overflow: hidden;
+
+  transition: opacity 200ms;
+  opacity: 0;
+}
+
+.app-layout-container.visible {
+  opacity: 1;
+}
+
+/**
+ * State where the aside is hidden
+ */
+
+.app-layout-no-aside .app-layout-aside-wrap {
+  display: none;
+}
+
+.app-layout-no-aside .app-layout-container {
+  padding: 1.6rem 15px 0;
+}
+
+/**
+ * Footer
+ */
+.app-footer-nav-list {
+  max-width: $page-max-width;
+  min-width: $page-min-width;
+  padding: 0 15px 0;
+  margin: 0 auto;
+}
+
+/**
+ * Embeded content (old IM wrapper)
+ */
+
+.app-layout-embed {
+  display: flex;
+  flex: 1 0 auto;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 1rem;
+  width: 100%;
+  max-width: 920px;
+  box-sizing: content-box;
+  overflow: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color: rgba(201, 224, 253, 0.8);
+}
+
+.app-layout-embed-inner {
+  width: 100%;
+}
+.price-box {
+  .price-box-chevron {
+    svg {
+      transform-origin: center center;
+    }
+  }
+}
+
+
+@media print {
+  @-moz-document url-prefix() {
+    .wrapper,
+    .app-layout-main,
+    .row {
+      display: block !important;
+    }
+  }
+  html {
+    background-color: #FFF;
+  }
+  .app-layout {
+    // IE11 bugfix. Removes extra empty pages issue caused by IE11 + flexbox.
+    // NOTE that this changes the behaviour for all browsers. If any issue arise in the feature. Removing this might be a good option and accept strange IE11 behaviour
+    display: block !important;
+
+    padding-top: 10px;
+    background-color: #FFF; // Fix chrome: First page did not have white background
+  }
+  .app-layout-aside {
+    position: absolute !important;
+    visibility: hidden;
+    margin-left: -9999px;
+    margin-top: -9999px;
+  }
+  .app-layout-container {
+    // IE11 bugfix. The print was cut short vertically due to overflow:hidden. Bug was visible in pages resulting in 2 or more print pages (Date: 2017-03-13, Trello-ID: )
+    overflow: visible;
+
+    // IE11 bugfix. Removes extra empty pages issue caused by IE11 + flexbox
+    // NOTE that this changes the behaviour for all browsers. If any issue arise in the feature. Removing this might be a good option and accept strange IE11 behaviour
+    display: block !important;
+
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+}

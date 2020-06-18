@@ -1,0 +1,25 @@
+$page-max-width: 1226px;
+$page-min-width: 300px;
+$page-width: 1226px;
+$header-height: 60px;
+$footer-height: 70px;
+$aside-width: 260px;
+$aside-width-lg: 260px;
+$body-bg: #ffff;
+$font-family-master: 'Bebas Neue', cursive;
+
+$font-size-root: 16px;
+$font-size-xs: 0.75rem;
+
+
+
+
+/**
+ * App specific styling
+ */
+@import "global";
+@import "components/layout";
+@import "components/form";
+@import "components/card";
+@import "components/alert";
+@import "components/input";
