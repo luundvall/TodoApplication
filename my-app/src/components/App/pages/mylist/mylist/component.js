@@ -49,8 +49,12 @@ export default function ({elq}) {
         return (
             <React.Fragment>
                 <div style={{width: isSmall ? '100%' : '70%', margin: 'auto'}}>
-                    <div className="spinner-border" role="status">
-                        <span className="sr-only">Loading...</span>
+                    <div className={props.isLoadingListAction ? 'parentDisable' : ''} style={{width: '100%'}}>
+                        <div className='overlay-box'>
+                            {props.isLoadingListAction ? <div className="spinner-border" role="status">
+                                <span className="sr-only">Loading...</span>
+                            </div> : null}
+                        </div>
                     </div>
                     {!props.chosenList ?
                         <div style={{display: 'flex', width:'100%'}}>

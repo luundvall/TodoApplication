@@ -7,6 +7,8 @@ import loginControllerMaker from './components/App/pages/login/controller';
 import menuControllerMaker from './components/Menu/controller';
 import footerControllerMaker from './components/Footer/controller';
 import myListControllerMaker from './components/App/pages/mylist/controller';
+import loadingControllerMaker from './components/App/Loading/controller';
+
 import refreshTimerMaker from './refreshTimer';
 import cookieHandlerMaker from './cookieHandler';
 import serviceMaker from './services/service';
@@ -18,7 +20,9 @@ export default function ({url, elq, axios}) {
         shouldDisplayLogin: true,
         shouldDisplayRefreshSessionMessage: false,
         loggedInUser: null,
-        isLoggedIn: false
+        isLoggedIn: false,
+        isLoading: true,
+        isLoadingListAction: false
     });
     const cookieHandler = cookieHandlerMaker();
 
@@ -76,6 +80,10 @@ export default function ({url, elq, axios}) {
             } else {
                 buildApp(appStateModel.deref().isLoggedIn);
             }
+            appStateModel.swap(function (state) {
+                state.isLoading = false;
+                return state;
+            });
         });
     }());
 
@@ -87,6 +95,11 @@ export default function ({url, elq, axios}) {
         refreshTimer,
         axios,
         url
+    });
+
+    modules.loading = loadingControllerMaker({
+        elq,
+        appStateModel
     });
 
     modules.footer = footerControllerMaker({
@@ -108,6 +121,10 @@ export default function ({url, elq, axios}) {
         axios
     });
     const appViewsBuilder = appViewsBuilderMaker(modules);
+
+    (function buildLoadingView(isLoading) {
+        appViewsBuilder.buildLoadingView(isLoading);
+    })();
 
     function buildApp(isLoggedIn) {
         appViewsBuilder.build(isLoggedIn);

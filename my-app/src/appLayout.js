@@ -10,6 +10,7 @@ export default function () {
                 <div class="n-layout-aside-wrap lb4">
                     <div class="n-layout-aside-wrap body">
                         <div id="menu"></div>
+                        <div id="loading" class="container mt-4"></div>
                         <div id="app" class="container mt-4"></div>
                     </div>
                 </div>

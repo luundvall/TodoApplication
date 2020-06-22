@@ -20,6 +20,7 @@ export default function ({appStateModel, elq, url, axios}) {
                 Component: Component,
                 getProps: function () {
                     return {
+                        isLoadingListAction: appStateModel.deref().isLoadingListAction,
                         lists: appStateModel.deref().todoLists,
                         setList: function (updatedList, listId) {
                             if (appStateModel.deref().list !== updatedList) {

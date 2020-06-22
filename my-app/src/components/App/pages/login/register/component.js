@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import React, {useEffect, useState} from 'react';
-import { useHistory } from 'react-router-dom';
 import * as validators from './validators';
 import responsiveBlockMaker from '../../../../../util/responsiveBlock';
 
@@ -18,7 +17,6 @@ export default function ({elq}) {
         const [passwordRepeatErrors, setPasswordRepeatErrors] = useState('');
         const [validated, setValidated] = useState(false);
         const refs = [];
-        const history = useHistory();
 
         function getField(fieldName) {
             return _.find(refs, (field) => field.name === fieldName);

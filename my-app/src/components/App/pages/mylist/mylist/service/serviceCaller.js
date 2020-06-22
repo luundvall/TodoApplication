@@ -13,11 +13,12 @@ export default function ({axios, url, appStateModel}) {
                 state.todoLists = data;
                 return state;
             })
-        });
+        }).finally(unsetIsLoading);
 
     };
 
     const callUpdateList = function (updatedList, listId) {
+        setIsLoading();
         axios.post(url + 'updatelist', {
             listId: listId,
             username: appStateModel.deref().loggedInUser,
@@ -38,10 +39,11 @@ export default function ({axios, url, appStateModel}) {
                 });
                 return state;
             })
-        });
+        }).finally(unsetIsLoading);
     };
 
     const updateListName = function (listId, name) {
+        setIsLoading();
         axios.post(url + 'updatelistname', {
             listId: listId,
             name: name
@@ -62,10 +64,11 @@ export default function ({axios, url, appStateModel}) {
                 return state;
             });
 
-        }).then(fetchLists());
+        }).then(fetchLists);
     };
 
     const createNewList = function () {
+        setIsLoading();
         return axios.post(url + 'createlist', {
             username: appStateModel.deref().loggedInUser
         }, {
@@ -77,6 +80,7 @@ export default function ({axios, url, appStateModel}) {
     };
 
     const deleteList = function (listId) {
+        setIsLoading();
         return axios.post(url + 'deletelist', {
             listId: listId
         }, {
@@ -91,6 +95,20 @@ export default function ({axios, url, appStateModel}) {
                 });
                 return state;
             })
+        }).finally(unsetIsLoading);
+    };
+
+    const setIsLoading = () => {
+        appStateModel.swap(function (state) {
+            state.isLoadingListAction = true;
+            return state;
+        });
+    };
+
+    const unsetIsLoading = () => {
+        appStateModel.swap(function (state) {
+            state.isLoadingListAction = false;
+            return state;
         });
     };
 

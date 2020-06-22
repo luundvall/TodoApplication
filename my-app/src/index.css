@@ -4,34 +4,36 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
 }
 
-.contentLeft {
-  background-color: red;
-  color: white;
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.overlay-box {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  color: white; background: #666666; opacity: .8;
+  z-index: 1000;
+}
+
+.parentDisable{
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #666;
+  opacity: 0.8;
+  z-index: 998;
   height: 100%;
   width: 100%;
-  display: flex;
-  align-items: center;
-  padding: 4px;
-}
-
-.contentRight {
-  composes: contentLeft; /* stylelint-disable-line value-keyword-case */
-  background-color: green;
-  justify-content: flex-end;
-}
-
-.listItem {
-  border-bottom: 1px solid #c4c4c4;
-  height: 32px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding: 4px 8px;
-  user-select: none;
-  cursor: pointer;
 }

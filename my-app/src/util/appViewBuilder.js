@@ -15,7 +15,13 @@ export default function appViewsBuilder(modules) {
         }
     }
 
+    function renderLoadingView() {
+        modules.loading.view.render(document.getElementById('loading'));
+        renderAndSaveToList(modules.loading.view);
+    }
+
     return {
+        buildLoadingView: (isLoading) => renderLoadingView(isLoading),
         buildAppView: (isLoggedIn) => renderActiveAppView(isLoggedIn),
         build: function (isLoggedIn) {
             modules.menu.view.render(document.getElementById('menu'));

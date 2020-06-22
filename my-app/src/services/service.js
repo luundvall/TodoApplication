@@ -17,8 +17,8 @@ export default function ({axios, url, cookieHandler, appStateModel}) {
         });
     }
 
-    async function verifyJwt() {
-        return await axios.get(url + 'verifyjwt', {
+    function verifyJwt() {
+        return axios.get(url + 'verifyjwt', {
             withCredentials: true,
             headers: {
                 'Access-Control-Allow-Origin': url
