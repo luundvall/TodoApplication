@@ -3,8 +3,16 @@ import React, {useEffect, useState} from 'react';
 import * as validators from './validators';
 import responsiveBlockMaker from '../../../../../util/responsiveBlock';
 
-export default function ({elq}) {
+const inputStyle = {
+    width: '100%',
+    border: 'none',
+    borderBottom: '1px solid black',
+    display: 'inline-block',
+    backgroundColor: 'transparent'
 
+};
+
+export default function ({elq}) {
     const ResponsiveBlock = responsiveBlockMaker({elq: elq});
 
     function LoginComponent({size, state, authenticate, controller, registerSelected, hasError}) {
@@ -50,15 +58,6 @@ export default function ({elq}) {
                     });
             }
         }
-
-        const inputStyle = {
-            width: '100%',
-            border: 'none',
-            borderBottom: '1px solid black',
-            display: 'inline-block',
-            backgroundColor: 'transparent'
-
-        };
 
         function ErrorPanel({serviceError}) {
             return (<div className="mt-3">

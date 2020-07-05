@@ -105,13 +105,6 @@ export default function ({elq}) {
                         }) :
                         <React.Fragment>
                             <SelectedList list={props.chosenList.list} selectedListId={props.chosenList.listId} {...props}/>
-                            <button style={{backgroundColor: 'transparent', border: 'none'}}
-                                    onClick={function (event) {
-                                        event.preventDefault();
-                                        props.setChosenList(null);
-                                    }}>
-                                Back to lists
-                            </button>
                         </React.Fragment>
                     }
                 </div>

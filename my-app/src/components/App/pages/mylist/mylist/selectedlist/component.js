@@ -10,7 +10,7 @@ export default function ({elq}) {
 
     const ResponsiveBlock = responsiveBlockMaker({elq: elq});
 
-    function SelectedListComponent({size, list, selectedListId, setList}) {
+    function SelectedListComponent({setChosenList, size, list, selectedListId, setList}) {
         const isSmall = size === 'small';
         const [tasks, setTask] = useState(list.list);
         const [emptyItemFocus, setEmptyItemFocus] = useState(null);
@@ -139,6 +139,30 @@ export default function ({elq}) {
                         })}
 
                     </SwipeableList>
+                    {tasks.length > 0 ? 
+                        <div>
+                            <div style={{display: 'flex', width: '100%'}}>
+                                <div>
+                                <button style={{backgroundColor: 'transparent', border: 'none'}}
+                                    onClick={function (event) {
+                                        event.preventDefault();
+                                        setChosenList(null);
+                                    }}>
+                                Back to lists
+                            </button>
+                                </div>
+                                <div style={{marginLeft: 'auto'}}>
+                                    <button onClick={function (event) {
+                                        event.preventDefault();
+                                        addEmptyItem();
+                                    }}
+                                    style={{border: 'none', backgroundColor: 'transparent'}}>
+                                    Add item &nbsp;<FontAwesomeIcon style={{fontSize: '15px'}} icon={faPlusCircle}/>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>        
+                        : null}
                 </div>
             </form>
         );
